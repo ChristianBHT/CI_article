@@ -39,12 +39,9 @@ simulateExpLogData <- function(N) {
   Y <- numeric(N)
   
   for (i in 1:N) {
-    # Exponential impact on X
     X[i] <- ifelse(exp(Z1[i]) + Z2[i] > 1.5, 3,
                    ifelse(exp(Z1[i]) + Z2[i] > 0.5, 2,
                           ifelse(exp(Z1[i]) > 0, 1, 0)))
-    
-    # Logarithmic impact on Y
     Y[i] <- ifelse(log(abs(Z1[i]) + 1) + Z2[i] > 0.5, 3,
                    ifelse(log(abs(Z1[i]) + 1) + Z2[i] > 0, 2,
                           ifelse(log(abs(Z1[i]) + 1) > -0.5, 1, 0)))
