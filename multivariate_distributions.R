@@ -167,3 +167,71 @@ multinominal <- function(N, zeta = 1.5) {
   return(df)
 }
 
+
+########## Continous Multivariate Functions ###########
+
+normal_data <- function(N){
+  Z1 <- rnorm(N,0,1)
+  Z2 <- rnorm(N,0,1)
+  X <- rnorm(N,Z1 + Z2,1)
+  Y <- rnorm(N, Z1 + Z2,1)
+  df <- data.frame(Z1, Z2, X, Y)
+  return(df)
+}
+
+hierarchical_data <- function(N, groups = 4) {
+  group <- rep(1:groups, each = N/groups)
+  Z1 <- rnorm(N) + group
+  Z2 <- rnorm(N, mean = group)
+  X <- Z1 * Z2 + group + rnorm(N)
+  Y <- Z1 - Z2 + group + rnorm(N)
+  df <- data.frame(Group = group, Z1, Z2, X, Y)
+  return(df)
+}
+
+skewed_data <- function(N) {
+  Z1 <- rexp(N, rate = 0.5)
+  Z2 <- rexp(N, rate = 0.5)
+  X <- Z1 + Z2 + rnorm(N)
+  Y <- Z1 * Z2 + rnorm(N)
+  df <- data.frame(Z1, Z2, X, Y)
+  return(df)
+}
+
+non_lin_normal <- function(N){
+  Z1 = rnorm(N,0,1)
+  Z2 = rnorm(N,0,1)
+  X = exp(Z1*Z2) + rnorm(N,0,1)
+  Y <- Z1*Z2 + rnorm(N,0,1)
+  df <- data.frame(Z1,Z2,X,Y)
+  return(df)
+}
+
+uniform_noise <- function(N) {
+  Z1 = rnorm(N, 0, 1)
+  Z2 = rnorm(N, 0, 1)
+  X = Z2 + Z1 + Z2 * Z1 + runif(N, min=-2, max=2) 
+  Y = Z2 + Z1 + Z2 * Z1 + runif(N, min=-2, max=2)
+  df <- data.frame(Z1, Z2, X, Y)
+  return(df)
+}
+
+exponential_noise <- function(N, rate_param = 1) {
+  Z1 = rnorm(N, 0, 1)
+  Z2 = rnorm(N, 0, 1)
+  rate_param = rate_param
+  X = Z2 + Z1 + Z2 * Z1 + rexp(N, rate = rate_param) - (1 / rate_param)
+  Y = Z2 + Z1 + Z2 * Z1 + rexp(N, rate = rate_param) - (1 / rate_param)
+  df <- data.frame(Z1, Z2, X, Y)
+  return(df)
+}
+
+poisson_noise <- function(N){
+  Z1 = rnorm(N,0,1)
+  Z2 = rnorm(N,0,1)
+  X = Z2*Z1 + (rpois(N, lambda = 1)-1)
+  Y = Z2*Z1  + (rpois(N, lambda = 1)-1)
+  df <- data.frame(Z1,Z2,X,Y)
+  return(df)
+}
+
