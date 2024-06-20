@@ -169,31 +169,13 @@ multinominal <- function(N, zeta = 1.5) {
 
 
 ########## Continous Multivariate Functions ###########
+########## Continous Multivariate Functions ###########
 
 normal_data <- function(N){
   Z1 <- rnorm(N,0,1)
   Z2 <- rnorm(N,0,1)
-  X <- rnorm(N,Z1 + Z2,1)
-  Y <- rnorm(N, Z1 + Z2,1)
-  df <- data.frame(Z1, Z2, X, Y)
-  return(df)
-}
-
-hierarchical_data <- function(N, groups = 4) {
-  group <- rep(1:groups, each = N/groups)
-  Z1 <- rnorm(N) + group
-  Z2 <- rnorm(N, mean = group)
-  X <- Z1 * Z2 + group + rnorm(N)
-  Y <- Z1 - Z2 + group + rnorm(N)
-  df <- data.frame(Group = group, Z1, Z2, X, Y)
-  return(df)
-}
-
-skewed_data <- function(N) {
-  Z1 <- rexp(N, rate = 0.5)
-  Z2 <- rexp(N, rate = 0.5)
-  X <- Z1 + Z2 + rnorm(N)
-  Y <- Z1 * Z2 + rnorm(N)
+  X <- rnorm(N, Z1 + Z2, 1)
+  Y <- rnorm(N, Z1 + Z2, 1)
   df <- data.frame(Z1, Z2, X, Y)
   return(df)
 }
@@ -231,6 +213,16 @@ poisson_noise <- function(N){
   Z2 = rnorm(N,0,1)
   X = Z2*Z1 + (rpois(N, lambda = 1)-1)
   Y = Z2*Z1  + (rpois(N, lambda = 1)-1)
+  df <- data.frame(Z1,Z2,X,Y)
+  return(df)
+}
+
+sinusoidal <- function(N, a = 1){
+  Z1 = rnorm(N,0,1)
+  Z2 = rnorm(N,0,1)
+  Z <- Z1 + Z2
+  X = exp(-(Z)^2 / 2) * sin(a * (2*Z1 + 0.1*Z2)) + rnorm(N,0,0.1)
+  Y = exp(-(Z)^2 / 2) * sin(a * (2*Z2 + 0.1*Z1)) + rnorm(N,0,0.1) 
   df <- data.frame(Z1,Z2,X,Y)
   return(df)
 }
