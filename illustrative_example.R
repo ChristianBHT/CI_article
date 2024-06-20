@@ -142,7 +142,7 @@ combined_data <- rbind(data.frame(Metric = NullDist$Metric1, Type = "NullDist"),
                        data.frame(Metric = TestDist$Metric1, Type = "TestDist")
 )
 plot1 <- ggplot(combined_data, aes(x = Metric, fill = Type)) +
-  geom_histogram(color = "black", position = "identity", alpha = 0.5, bins = 15) +
+  geom_histogram(color = "black", position = "identity",  bins = 15) +
   scale_fill_manual(values = c(NullDist = 'white', TestDist = "gray")) +
   xlim(min(c(TestDist$Metric1, NullDist$Metric1)), max(c(TestDist$Metric1, NullDist$Metric1))) +
   labs(title = "", x = "Log loss", y = "Frequency") +
@@ -156,7 +156,7 @@ combined_data <- rbind(data.frame(Metric = NullDist$Metric2, Type = "NullDist"),
 )
 
 plot2 <- ggplot(combined_data, aes(x = Metric, fill = Type)) +
-  geom_histogram(color = "black", position = "identity", alpha = 0.5, bins = 15) +
+  geom_histogram(color = "black", position = "identity", bins = 15) +
   scale_fill_manual(values = c(NullDist = 'white', TestDist = "gray")) +
   xlim(min(c(TestDist$Metric2, NullDist$Metric2)), max(c(TestDist$Metric2, NullDist$Metric2))) +
   labs(title = "", x = "Kappa score", y = "Frequency") +
@@ -167,7 +167,6 @@ plot2 <- ggplot(combined_data, aes(x = Metric, fill = Type)) +
 
 overlay_distributions_false_null <- grid.arrange(plot1, plot2, ncol = 2)
 ggsave("overlay_distributions_false_null.eps", plot = overlay_distributions_false_null, width = 8 , height = 5)
-
 
 p_values <- list()
 for (i in 1:1000) {
