@@ -169,7 +169,6 @@ multinominal <- function(N, zeta = 1.5) {
 
 
 ########## Continous Multivariate Functions ###########
-########## Continous Multivariate Functions ###########
 
 normal_data <- function(N){
   Z1 <- rnorm(N,0,1)
