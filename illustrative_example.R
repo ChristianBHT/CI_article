@@ -40,19 +40,21 @@ plot1 <- ggplot(combined_data, aes(x = Metric, fill = Type)) +
   theme_minimal() +
   guides(fill = "none") +
   theme(text = element_text(size = 16)) +
-  theme(axis.text.y = element_blank(), axis.title.y = element_blank())
+  theme(axis.text.y = element_blank(), axis.title.y = element_blank()) +
+  geom_vline(xintercept = 0.1186, linetype = "dashed", color = "black") 
 
 combined_data <- rbind(data.frame(Metric = NullDist$Metric2, Type = "NullDist"))
 
 plot2 <- ggplot(combined_data, aes(x = Metric, fill = Type)) +
   geom_histogram(color = "black", position = "identity", alpha = 0.5, bins = 15) +
-  scale_fill_manual(values = c(NullDist = trans_blue, TestDist = "red")) +
+  scale_fill_manual(values = c(NullDist = trans_blue)) +
   xlim(min(c(NullDist$Metric2)), max(c(NullDist$Metric2))) +
   labs(title = "", x = "Kappa score", y = "Frequency") +
   theme_minimal() +
   guides(fill = "none") +
   theme(text = element_text(size = 16)) +
-  theme(axis.text.y = element_blank(), axis.title.y = element_blank())
+  theme(axis.text.y = element_blank(), axis.title.y = element_blank()) +
+  geom_vline(xintercept = 0.932762 , linetype = "dashed", color = "black") 
 
 null_distributions <- grid.arrange(plot1, plot2, ncol = 2)
 ggsave("null_distributions.eps", plot = null_distributions, width = 8 , height = 5)
