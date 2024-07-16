@@ -208,37 +208,37 @@ for (N in c(500, 800, 2000)) {
     InteractionP_values_gcm <- gcm$p.value
     
     ########################
-    set.seed(i)
+    set.seed(i+1)
     data <- simulateExpLogData(N)
     gcm <- gcm.test(X = data$X, Y = data$Y, Z = data.frame(data$Z2, data$Z1),  regr.method = "xgboost")
     ExpLogP_values_gcm <- gcm$p.value
     
     ########################
-    set.seed(i)
+    set.seed(i+2)
     data <- simulateTrigData(N)
     gcm <- gcm.test(X = data$X, Y = data$Y, Z = data.frame(data$Z2, data$Z1),  regr.method = "xgboost")
     TrigDataP_values_gcm <- gcm$p.value
     
     ########################
-    set.seed(i)
+    set.seed(i+3)
     data <- simulatePolyData(N)
     gcm <- gcm.test(X = data$X, Y = data$Y, Z = data.frame(data$Z2, data$Z1),  regr.method = "xgboost")
     PolyDataP_values_gcm <- gcm$p.value
     
     ########################
-    set.seed(i)
+    set.seed(i+4)
     data <- simulateNonLinearData(N)
     gcm <- gcm.test(X = data$X, Y = data$Y,  Z = data.frame(data$Z2, data$Z1),  regr.method = "xgboost")
     NonLinearP_values_gcm <- gcm$p.value
     
     ########################
-    set.seed(i)
+    set.seed(i+5)
     data <- simulateComplexCategorization(N)
     gcm <- gcm.test(X = data$X, Y = data$Y, Z = data.frame(data$Z2, data$Z1),  regr.method = "xgboost")
     ComplexCategorizationP_values_gcm <- gcm$p.value
     
     ########################
-    set.seed(i)
+    set.seed(i+6)
     data <- multinominal(N)
     data$Y <- as.integer(as.factor(data$Y))-1
     data$X <- as.integer(as.factor(data$X))-1
